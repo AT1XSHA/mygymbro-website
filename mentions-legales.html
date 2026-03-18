@@ -1,134 +1,319 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mentions Légales — MyGymBro</title>
-  <meta name="description" content="Mentions légales du site et de l'application MyGymBro.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    :root {
-      --green: #32CD32;
-      --black: #0A0A0A;
-      --gray-900: #1A1A1A;
-      --gray-700: #3A3A3A;
-      --gray-400: #999;
-      --gray-200: #E5E5E5;
-      --gray-100: #F5F5F5;
-      --white: #FFFFFF;
-      --font-display: 'Plus Jakarta Sans', sans-serif;
-      --font-body: 'DM Sans', sans-serif;
-    }
-    body { font-family: var(--font-body); color: var(--gray-900); background: var(--white); -webkit-font-smoothing: antialiased; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Mentions Légales — MyGymBro</title>
+    <meta
+      name="description"
+      content="Mentions légales du site et de l'application MyGymBro."
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      :root {
+        --green: #32cd32;
+        --black: #0a0a0a;
+        --gray-900: #1a1a1a;
+        --gray-700: #3a3a3a;
+        --gray-400: #999;
+        --gray-200: #e5e5e5;
+        --gray-100: #f5f5f5;
+        --white: #ffffff;
+        --font-display: 'Plus Jakarta Sans', sans-serif;
+        --font-body: 'DM Sans', sans-serif;
+      }
+      body {
+        font-family: var(--font-body);
+        color: var(--gray-900);
+        background: var(--white);
+        -webkit-font-smoothing: antialiased;
+      }
 
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(10,10,10,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.06); }
-    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
-    .logo { font-family: var(--font-display); font-weight: 800; font-size: 20px; color: var(--white); text-decoration: none; }
-    .logo span { color: var(--green); }
-    .nav-links { display: flex; gap: 28px; }
-    .nav-links a { color: var(--gray-400); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--white); }
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background: rgba(10, 10, 10, 0.95);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .nav-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 24px;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .logo {
+        font-family: var(--font-display);
+        font-weight: 800;
+        font-size: 20px;
+        color: var(--white);
+        text-decoration: none;
+      }
+      .logo span {
+        color: var(--green);
+      }
+      .nav-links {
+        display: flex;
+        gap: 28px;
+      }
+      .nav-links a {
+        color: var(--gray-400);
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        transition: color 0.2s;
+      }
+      .nav-links a:hover {
+        color: var(--white);
+      }
 
-    .page-header { background: var(--black); padding: 120px 24px 60px; text-align: center; }
-    .page-header h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(28px, 5vw, 42px); color: var(--white); }
-    .page-header p { color: var(--gray-400); margin-top: 12px; font-size: 15px; }
+      .page-header {
+        background: var(--black);
+        padding: 120px 24px 60px;
+        text-align: center;
+      }
+      .page-header h1 {
+        font-family: var(--font-display);
+        font-weight: 800;
+        font-size: clamp(28px, 5vw, 42px);
+        color: var(--white);
+      }
+      .page-header p {
+        color: var(--gray-400);
+        margin-top: 12px;
+        font-size: 15px;
+      }
 
-    .content { max-width: 780px; margin: 0 auto; padding: 60px 24px 100px; }
-    .content h2 { font-family: var(--font-display); font-weight: 700; font-size: 22px; margin: 48px 0 16px; padding-top: 16px; border-top: 1px solid var(--gray-200); }
-    .content h2:first-of-type { margin-top: 0; border-top: none; padding-top: 0; }
-    .content p { font-size: 15px; line-height: 1.75; color: var(--gray-700); margin-bottom: 14px; }
-    .content strong { color: var(--gray-900); }
-    .content a { color: var(--green); text-decoration: none; }
-    .content a:hover { text-decoration: underline; }
+      .content {
+        max-width: 780px;
+        margin: 0 auto;
+        padding: 60px 24px 100px;
+      }
+      .content h2 {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 22px;
+        margin: 48px 0 16px;
+        padding-top: 16px;
+        border-top: 1px solid var(--gray-200);
+      }
+      .content h2:first-of-type {
+        margin-top: 0;
+        border-top: none;
+        padding-top: 0;
+      }
+      .content p {
+        font-size: 15px;
+        line-height: 1.75;
+        color: var(--gray-700);
+        margin-bottom: 14px;
+      }
+      .content strong {
+        color: var(--gray-900);
+      }
+      .content a {
+        color: var(--green);
+        text-decoration: none;
+      }
+      .content a:hover {
+        text-decoration: underline;
+      }
 
-    footer { background: var(--black); padding: 48px 24px; text-align: center; }
-    .footer-inner { max-width: 1100px; margin: 0 auto; }
-    .footer-logo { font-family: var(--font-display); font-weight: 800; font-size: 18px; color: var(--white); margin-bottom: 20px; }
-    .footer-logo span { color: var(--green); }
-    .footer-links { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; }
-    .footer-links a { color: var(--gray-400); text-decoration: none; font-size: 14px; transition: color 0.2s; }
-    .footer-links a:hover { color: var(--white); }
-    .footer-copy { color: var(--gray-700); font-size: 13px; }
+      footer {
+        background: var(--black);
+        padding: 48px 24px;
+        text-align: center;
+      }
+      .footer-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      .footer-logo {
+        font-family: var(--font-display);
+        font-weight: 800;
+        font-size: 18px;
+        color: var(--white);
+        margin-bottom: 20px;
+      }
+      .footer-logo span {
+        color: var(--green);
+      }
+      .footer-links {
+        display: flex;
+        gap: 24px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 24px;
+      }
+      .footer-links a {
+        color: var(--gray-400);
+        text-decoration: none;
+        font-size: 14px;
+        transition: color 0.2s;
+      }
+      .footer-links a:hover {
+        color: var(--white);
+      }
+      .footer-copy {
+        color: var(--gray-700);
+        font-size: 13px;
+      }
 
-    @media (max-width: 600px) { .nav-links { gap: 16px; } .nav-links a { font-size: 13px; } }
-  </style>
-</head>
-<body>
-
-  <nav>
-    <div class="nav-inner">
-      <a href="/" class="logo">MyGym<span>Bro</span></a>
-      <div class="nav-links">
-        <a href="/cgu">CGU</a>
-        <a href="/politique-confidentialite">Confidentialité</a>
-        <a href="/mentions-legales">Mentions légales</a>
+      @media (max-width: 600px) {
+        .nav-links {
+          gap: 16px;
+        }
+        .nav-links a {
+          font-size: 13px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-inner">
+        <a
+          href="/"
+          class="logo"
+          >MyGym<span>Bro</span></a
+        >
+        <div class="nav-links">
+          <a href="/cgu">CGU</a>
+          <a href="/politique-confidentialite">Confidentialité</a>
+          <a href="/mentions-legales">Mentions légales</a>
+        </div>
       </div>
+    </nav>
+
+    <div class="page-header">
+      <h1>Mentions Légales</h1>
+      <p>Conformément à la loi n° 2004-575 du 21 juin 2004 (LCEN)</p>
     </div>
-  </nav>
 
-  <div class="page-header">
-    <h1>Mentions Légales</h1>
-    <p>Conformément à la loi n° 2004-575 du 21 juin 2004 (LCEN)</p>
-  </div>
+    <div class="content">
+      <h2>1. Éditeur</h2>
+      <p><strong>Nom</strong> : Fabian Schmidt</p>
+      <p><strong>Statut</strong> : Personne physique</p>
+      <p><strong>Adresse</strong> : ---</p>
+      <p><strong>E-mail</strong> : <a href="mailto:craftlabx@gmail.com">craftlabx@gmail.com</a></p>
 
-  <div class="content">
+      <h2>2. Directeur de la publication</h2>
+      <p><strong>Fabian Schmidt</strong></p>
 
-    <h2>1. Éditeur</h2>
-    <p><strong>Nom</strong> : Fabian Schmidt</p>
-    <p><strong>Statut</strong> : Personne physique</p>
-    <p><strong>Adresse</strong> : [ADRESSE PERSONNELLE]</p>
-    <p><strong>E-mail</strong> : <a href="mailto:craftlabx@gmail.com">craftlabx@gmail.com</a></p>
+      <h2>3. Hébergement</h2>
 
-    <h2>2. Directeur de la publication</h2>
-    <p><strong>Fabian Schmidt</strong></p>
+      <p><strong>Site web (mygymbro.fr)</strong></p>
+      <p>
+        GitHub Pages (GitHub, Inc.)<br />
+        88 Colin P Kelly Jr St<br />
+        San Francisco, CA 94107, États-Unis<br />
+        <a
+          href="https://github.com"
+          target="_blank"
+          rel="noopener"
+          >github.com</a
+        >
+      </p>
 
-    <h2>3. Hébergement</h2>
+      <p><strong>Application backend et données</strong></p>
+      <p>
+        Amazon Web Services, Inc.<br />
+        410 Terry Avenue North<br />
+        Seattle, WA 98109, États-Unis<br />
+        Région : Europe (Paris) — eu-west-3<br />
+        <a
+          href="https://aws.amazon.com"
+          target="_blank"
+          rel="noopener"
+          >aws.amazon.com</a
+        >
+      </p>
 
-    <p><strong>Site web (mygymbro.fr)</strong></p>
-    <p>Vercel Inc.<br>
-    440 N Barranca Ave #4133<br>
-    Covina, CA 91723, États-Unis<br>
-    <a href="https://vercel.com" target="_blank" rel="noopener">vercel.com</a></p>
+      <h2>4. Propriété intellectuelle</h2>
+      <p>
+        L'ensemble du contenu du site mygymbro.fr et de l'application MyGymBro (textes, graphismes,
+        logos, icônes, images, code source) est la propriété exclusive de l'Éditeur, sauf mention
+        contraire.
+      </p>
+      <p>
+        Toute reproduction, représentation, modification, publication ou adaptation de tout ou
+        partie des éléments du site ou de l'application, quel que soit le moyen ou le procédé
+        utilisé, est interdite sans l'autorisation écrite préalable de l'Éditeur.
+      </p>
 
-    <p><strong>Application backend et données</strong></p>
-    <p>Amazon Web Services, Inc.<br>
-    410 Terry Avenue North<br>
-    Seattle, WA 98109, États-Unis<br>
-    Région : Europe (Paris) — eu-west-3<br>
-    <a href="https://aws.amazon.com" target="_blank" rel="noopener">aws.amazon.com</a></p>
+      <h2>5. Protection des données personnelles</h2>
+      <p>
+        Pour toute information relative à la collecte et au traitement des données personnelles,
+        veuillez consulter notre
+        <a href="/politique-confidentialite">Politique de confidentialité</a>.
+      </p>
+      <p>
+        Conformément au RGPD, vous disposez d'un droit d'accès, de rectification, de suppression et
+        de portabilité de vos données. Pour exercer ces droits :
+        <a href="mailto:craftlabx@gmail.com">craftlabx@gmail.com</a>.
+      </p>
+      <p>
+        Vous pouvez également adresser une réclamation à la <strong>CNIL</strong> :
+        <a
+          href="https://www.cnil.fr"
+          target="_blank"
+          rel="noopener"
+          >www.cnil.fr</a
+        >.
+      </p>
 
-    <h2>4. Propriété intellectuelle</h2>
-    <p>L'ensemble du contenu du site mygymbro.fr et de l'application MyGymBro (textes, graphismes, logos, icônes, images, code source) est la propriété exclusive de l'Éditeur, sauf mention contraire.</p>
-    <p>Toute reproduction, représentation, modification, publication ou adaptation de tout ou partie des éléments du site ou de l'application, quel que soit le moyen ou le procédé utilisé, est interdite sans l'autorisation écrite préalable de l'Éditeur.</p>
+      <h2>6. Cookies</h2>
+      <p>
+        Le site mygymbro.fr n'utilise pas de cookies de suivi ou de publicité. Seuls des cookies
+        techniques strictement nécessaires au fonctionnement du site peuvent être utilisés.
+      </p>
 
-    <h2>5. Protection des données personnelles</h2>
-    <p>Pour toute information relative à la collecte et au traitement des données personnelles, veuillez consulter notre <a href="/politique-confidentialite">Politique de confidentialité</a>.</p>
-    <p>Conformément au RGPD, vous disposez d'un droit d'accès, de rectification, de suppression et de portabilité de vos données. Pour exercer ces droits : <a href="mailto:craftlabx@gmail.com">craftlabx@gmail.com</a>.</p>
-    <p>Vous pouvez également adresser une réclamation à la <strong>CNIL</strong> : <a href="https://www.cnil.fr" target="_blank" rel="noopener">www.cnil.fr</a>.</p>
+      <h2>7. Loi applicable</h2>
+      <p>
+        Le présent site et son contenu sont régis par le droit français. Tout litige sera soumis à
+        la compétence des tribunaux français.
+      </p>
+    </div>
 
-    <h2>6. Cookies</h2>
-    <p>Le site mygymbro.fr n'utilise pas de cookies de suivi ou de publicité. Seuls des cookies techniques strictement nécessaires au fonctionnement du site peuvent être utilisés.</p>
-
-    <h2>7. Loi applicable</h2>
-    <p>Le présent site et son contenu sont régis par le droit français. Tout litige sera soumis à la compétence des tribunaux français.</p>
-
-  </div>
-
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-logo">MyGym<span>Bro</span></div>
-      <div class="footer-links">
-        <a href="/cgu">CGU</a>
-        <a href="/politique-confidentialite">Politique de confidentialité</a>
-        <a href="/mentions-legales">Mentions légales</a>
-        <a href="mailto:craftlabx@gmail.com">Contact</a>
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-logo">MyGym<span>Bro</span></div>
+        <div class="footer-links">
+          <a href="/cgu">CGU</a>
+          <a href="/politique-confidentialite">Politique de confidentialité</a>
+          <a href="/mentions-legales">Mentions légales</a>
+          <a href="mailto:craftlabx@gmail.com">Contact</a>
+        </div>
+        <p class="footer-copy">© 2026 MyGymBro — Tous droits réservés.</p>
       </div>
-      <p class="footer-copy">© 2026 MyGymBro — Tous droits réservés.</p>
-    </div>
-  </footer>
-
-</body>
+    </footer>
+  </body>
 </html>

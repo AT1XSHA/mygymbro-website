@@ -104,7 +104,8 @@ nav.nav--scrolled {
   gap: 28px;
   align-items: center;
 }
-.nav-link--home {
+.nav-link--home,
+.nav-link--beta {
   display: none;
 }
 .nav-links a {
@@ -176,8 +177,13 @@ nav.nav--scrolled {
   .nav-links.open {
     transform: translateX(0);
   }
-  .nav-link--home {
+  .nav-link--home,
+  .nav-link--beta {
     display: block;
+  }
+  .nav-link--beta {
+    margin-top: 8px;
+    font-size: 15px !important;
   }
   .nav-links a {
     font-size: 18px;

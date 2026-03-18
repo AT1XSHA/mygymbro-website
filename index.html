@@ -60,42 +60,49 @@
       50% { opacity: 1; }
     }
 
-    /* Floating blobs */
+    /* Floating blobs — organic shapes, visible colors */
     .hero-blob {
       position: absolute;
-      border-radius: 50%;
-      background: rgba(50, 205, 50, 0.06);
-      filter: blur(80px);
       pointer-events: none;
+      z-index: 0;
     }
     .hero-blob--1 {
-      width: 600px; height: 600px;
-      top: -200px; left: -100px;
-      animation: blobFloat1 12s ease-in-out infinite;
+      width: 500px; height: 500px;
+      top: -80px; right: -60px;
+      background: rgba(50, 205, 50, 0.30);
+      filter: blur(70px);
+      border-radius: 40% 60% 55% 45% / 50% 40% 60% 50%;
+      animation: blobFloat1 18s ease-in-out infinite alternate;
     }
     .hero-blob--2 {
-      width: 400px; height: 400px;
-      bottom: -100px; right: -80px;
-      animation: blobFloat2 10s ease-in-out infinite;
+      width: 350px; height: 350px;
+      bottom: -40px; left: -60px;
+      background: rgba(30, 150, 30, 0.25);
+      filter: blur(60px);
+      border-radius: 55% 45% 40% 60% / 45% 55% 50% 50%;
+      animation: blobFloat2 15s ease-in-out infinite alternate;
+      animation-delay: -5s;
     }
     .hero-blob--3 {
-      width: 300px; height: 300px;
-      top: 40%; left: 60%;
-      animation: blobFloat3 14s ease-in-out infinite;
+      width: 400px; height: 400px;
+      top: 35%; left: 50%;
+      background: rgba(20, 50, 120, 0.15);
+      filter: blur(80px);
+      border-radius: 45% 55% 60% 40% / 55% 45% 40% 60%;
+      animation: blobFloat3 22s ease-in-out infinite alternate;
+      animation-delay: -10s;
     }
     @keyframes blobFloat1 {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(60px, 40px) scale(1.1); }
-      66% { transform: translate(-30px, 20px) scale(0.95); }
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(-30px, 25px) scale(1.08); }
     }
     @keyframes blobFloat2 {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(-50px, -30px) scale(1.15); }
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(25px, -20px) scale(1.1); }
     }
     @keyframes blobFloat3 {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      40% { transform: translate(30px, -50px) scale(1.05); }
-      80% { transform: translate(-20px, 30px) scale(0.9); }
+      0% { transform: translate(0, 0) scale(0.95); }
+      100% { transform: translate(-20px, 30px) scale(1.05); }
     }
 
     .hero-inner {
@@ -243,6 +250,7 @@
       display: flex;
       flex-direction: column;
       gap: 80px;
+      position: relative;
     }
     .step {
       display: flex;
@@ -263,50 +271,78 @@
     }
     .step-content {
       flex: 1;
-      padding: 32px 28px;
+      padding: 36px 32px;
       border-radius: 20px;
-      background: rgba(245, 245, 245, 0.8);
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
       transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
     }
     .step-content:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.9);
     }
     @supports (backdrop-filter: blur(1px)) {
       .step-content {
-        backdrop-filter: blur(20px) saturate(180%);
-        -webkit-backdrop-filter: blur(20px) saturate(180%);
-        background: rgba(255, 255, 255, 0.55);
+        backdrop-filter: blur(12px) saturate(120%);
+        -webkit-backdrop-filter: blur(12px) saturate(120%);
       }
     }
+
+    /* Large watermark number */
     .step-number {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: var(--black);
-      color: var(--green);
+      position: absolute;
+      top: -12px;
+      right: 16px;
       font-family: var(--font-display);
       font-weight: 800;
-      font-size: 18px;
+      font-size: 120px;
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 1.5px rgba(50, 205, 50, 0.15);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* Green accent bar + step label */
+    .step-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
       margin-bottom: 16px;
     }
+    .step-accent {
+      width: 32px;
+      height: 3px;
+      border-radius: 2px;
+      background: var(--green);
+      flex-shrink: 0;
+    }
+    .step-tag {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--green);
+    }
+
     .step-content h3 {
       font-family: var(--font-display);
       font-weight: 700;
       font-size: 24px;
       margin-bottom: 12px;
       color: var(--gray-900);
+      position: relative;
     }
     .step-content p {
       font-size: 16px;
       line-height: 1.7;
       color: var(--gray-700);
       max-width: 400px;
+      position: relative;
     }
 
     @media (max-width: 768px) {
@@ -323,6 +359,15 @@
       .step-content p {
         margin: 0 auto;
       }
+      .step-label {
+        justify-content: center;
+      }
+      .step-number {
+        font-size: 90px;
+        right: 50%;
+        transform: translateX(50%);
+        top: -8px;
+      }
     }
 
     /* ==============================
@@ -336,21 +381,20 @@
     .coach-card {
       padding: 24px;
       border-radius: 20px;
-      background: rgba(245, 245, 245, 0.8);
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
       text-align: center;
       transition: transform 0.3s, box-shadow 0.3s;
     }
     .coach-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.9);
     }
     @supports (backdrop-filter: blur(1px)) {
       .coach-card {
-        backdrop-filter: blur(20px) saturate(180%);
-        -webkit-backdrop-filter: blur(20px) saturate(180%);
-        background: rgba(255, 255, 255, 0.55);
+        backdrop-filter: blur(12px) saturate(120%);
+        -webkit-backdrop-filter: blur(12px) saturate(120%);
       }
     }
     .coach-card-mockup {
@@ -393,7 +437,6 @@
        ============================== */
     .section-blob {
       position: absolute;
-      border-radius: 50%;
       pointer-events: none;
       z-index: 0;
     }
@@ -406,48 +449,74 @@
       z-index: 1;
     }
 
-    /* "Pourquoi MyGymBro" blobs */
+    /* "Pourquoi MyGymBro" blobs — positioned UNDER the cards grid */
     .why-blob--1 {
-      width: 450px; height: 450px;
-      top: -120px; left: -80px;
-      background: rgba(50, 205, 50, 0.1);
-      filter: blur(100px);
-      animation: sectionFloat1 18s ease-in-out infinite alternate;
+      width: 500px; height: 500px;
+      top: 30%; left: -5%;
+      background: rgba(50, 205, 50, 0.35);
+      filter: blur(70px);
+      border-radius: 40% 60% 55% 45% / 50% 40% 60% 50%;
+      animation: sectionFloat1 20s ease-in-out infinite alternate;
     }
     .why-blob--2 {
+      width: 400px; height: 400px;
+      top: 25%; right: 5%;
+      background: rgba(30, 150, 30, 0.28);
+      filter: blur(60px);
+      border-radius: 55% 45% 50% 50% / 45% 55% 40% 60%;
+      animation: sectionFloat2 17s ease-in-out infinite alternate;
+      animation-delay: -6s;
+    }
+    .why-blob--3 {
+      width: 450px; height: 450px;
+      top: 45%; left: 30%;
+      background: rgba(20, 50, 120, 0.20);
+      filter: blur(65px);
+      border-radius: 45% 55% 60% 40% / 55% 45% 50% 50%;
+      animation: sectionFloat3 24s ease-in-out infinite alternate;
+      animation-delay: -12s;
+    }
+    .why-blob--4 {
       width: 350px; height: 350px;
-      bottom: -80px; right: -60px;
-      background: rgba(30, 60, 120, 0.07);
-      filter: blur(90px);
-      animation: sectionFloat2 15s ease-in-out infinite alternate;
-      animation-delay: -5s;
+      bottom: 10%; right: 15%;
+      background: rgba(50, 205, 50, 0.30);
+      filter: blur(55px);
+      border-radius: 50% 40% 55% 45% / 40% 60% 45% 55%;
+      animation: sectionFloat1 22s ease-in-out infinite alternate;
+      animation-delay: -8s;
     }
 
     /* CTA blobs */
     .cta-blob--1 {
       width: 400px; height: 400px;
-      top: -100px; right: 20%;
-      background: rgba(50, 205, 50, 0.09);
-      filter: blur(100px);
-      animation: sectionFloat1 16s ease-in-out infinite alternate;
-      animation-delay: -3s;
+      top: -60px; right: 10%;
+      background: rgba(50, 205, 50, 0.30);
+      filter: blur(70px);
+      border-radius: 50% 40% 55% 45% / 45% 55% 40% 60%;
+      animation: sectionFloat1 18s ease-in-out infinite alternate;
+      animation-delay: -4s;
     }
     .cta-blob--2 {
       width: 300px; height: 300px;
-      bottom: -60px; left: -40px;
-      background: rgba(30, 60, 120, 0.06);
-      filter: blur(80px);
-      animation: sectionFloat2 20s ease-in-out infinite alternate;
-      animation-delay: -8s;
+      bottom: -40px; left: -30px;
+      background: rgba(20, 50, 120, 0.12);
+      filter: blur(70px);
+      border-radius: 55% 45% 40% 60% / 50% 50% 55% 45%;
+      animation: sectionFloat2 22s ease-in-out infinite alternate;
+      animation-delay: -9s;
     }
 
     @keyframes sectionFloat1 {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(25px, -20px); }
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(25px, -20px) scale(1.06); }
     }
     @keyframes sectionFloat2 {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(-20px, 30px); }
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(-20px, 30px) scale(1.08); }
+    }
+    @keyframes sectionFloat3 {
+      0% { transform: translate(0, 0) scale(0.95); }
+      100% { transform: translate(15px, -25px) scale(1.05); }
     }
 
     /* ==============================
@@ -462,22 +531,27 @@
       padding: 32px 28px;
       border-radius: 20px;
       background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s, background 0.3s;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      position: relative;
+      z-index: 1;
     }
     @supports (backdrop-filter: blur(1px)) {
       .arg-card {
-        backdrop-filter: blur(20px) saturate(180%);
-        -webkit-backdrop-filter: blur(20px) saturate(180%);
-        background: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(16px) saturate(160%);
+        -webkit-backdrop-filter: blur(16px) saturate(160%);
+      }
+    }
+    @supports not (backdrop-filter: blur(1px)) {
+      .arg-card {
+        background: rgba(30, 30, 30, 0.92);
       }
     }
     .arg-card:hover {
       transform: translateY(-4px) scale(1.02);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255, 255, 255, 0.12);
-      border-color: rgba(50, 205, 50, 0.2);
-      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(50, 205, 50, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.15);
     }
     .arg-icon {
       width: 48px;
@@ -535,23 +609,22 @@
       text-align: center;
       padding: 32px 28px;
       border-radius: 20px;
-      background: rgba(245, 245, 245, 0.8);
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
       flex: 1;
       min-width: 200px;
       max-width: 300px;
       transition: transform 0.3s, box-shadow 0.3s;
     }
     .stat-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.9);
     }
     @supports (backdrop-filter: blur(1px)) {
       .stat-card {
-        backdrop-filter: blur(20px) saturate(180%);
-        -webkit-backdrop-filter: blur(20px) saturate(180%);
-        background: rgba(255, 255, 255, 0.55);
+        backdrop-filter: blur(12px) saturate(120%);
+        -webkit-backdrop-filter: blur(12px) saturate(120%);
       }
     }
     .stat-value {
@@ -587,18 +660,6 @@
     .cta-section {
       position: relative;
       overflow: hidden;
-    }
-    .cta-section::before {
-      content: '';
-      position: absolute;
-      width: 500px;
-      height: 500px;
-      border-radius: 50%;
-      background: rgba(50, 205, 50, 0.05);
-      filter: blur(100px);
-      top: -150px;
-      right: -100px;
-      pointer-events: none;
     }
     .cta-inner {
       display: flex;
@@ -679,19 +740,26 @@
 
     /* Mobile: reduce blur cost, simplify blobs */
     @media (max-width: 768px) {
-      .hero-blob {
-        display: none;
-      }
+      .hero-blob,
       .section-blob {
         animation: none !important;
       }
-      .why-blob--2,
-      .cta-blob--2 {
+      .hero-blob--3,
+      .why-blob--3,
+      .why-blob--4 {
         display: none;
       }
+      .hero-blob--1,
       .why-blob--1,
       .cta-blob--1 {
-        width: 250px; height: 250px;
+        width: 280px; height: 280px;
+        filter: blur(50px);
+      }
+      .hero-blob--2,
+      .why-blob--2,
+      .cta-blob--2 {
+        width: 220px; height: 220px;
+        filter: blur(50px);
       }
       @supports (backdrop-filter: blur(1px)) {
         .step-content,
@@ -762,17 +830,14 @@
             <p class="beta-note">Actuellement en bêta fermée — places limitées</p>
           </div>
         </div>
-        <div class="hero-mockup">
-          <img src="assets/mockup-swipe.png" alt="Écran de swipe MyGymBro" width="560" height="1120">
-        </div>
       </div>
     </section>
 
     <!-- ===== SECTION 2 — COMMENT ÇA MARCHE ===== -->
     <section class="section section--light" id="how">
       <div class="section-inner">
-        <p class="section-label gs-reveal">Simple comme bonjour</p>
-        <h2 class="section-title gs-reveal">Comment ça marche</h2>
+        <p class="section-label gs-reveal">Comment ça marche</p>
+        <h2 class="section-title gs-reveal">3 étapes pour commencer</h2>
         <p class="section-subtitle gs-reveal">Trois étapes pour trouver ton futur partenaire de training.</p>
 
         <div class="steps">
@@ -782,7 +847,11 @@
               <img src="assets/mockup-swipe.png" alt="Swipe entre profils" width="480" height="960" loading="lazy">
             </div>
             <div class="step-content">
-              <div class="step-number">1</div>
+              <div class="step-number" aria-hidden="true">01</div>
+              <div class="step-label">
+                <span class="step-accent"></span>
+                <span class="step-tag">Étape 01</span>
+              </div>
               <h3>Swipe les profils</h3>
               <p>Parcours les sportifs autour de toi. On te propose des profils compatibles avec ta salle, ton niveau et tes créneaux.</p>
             </div>
@@ -794,7 +863,11 @@
               <img src="assets/mockup-match.png" alt="Écran de match" width="480" height="960" loading="lazy">
             </div>
             <div class="step-content">
-              <div class="step-number">2</div>
+              <div class="step-number" aria-hidden="true">02</div>
+              <div class="step-label">
+                <span class="step-accent"></span>
+                <span class="step-tag">Étape 02</span>
+              </div>
               <h3>Match par affinité</h3>
               <p>Quand l'intérêt est mutuel, c'est le match. L'algorithme te connecte avec ceux qui partagent vraiment tes objectifs.</p>
             </div>
@@ -806,7 +879,11 @@
               <img src="assets/mockup-discussion.png" alt="Chat en temps réel" width="480" height="960" loading="lazy">
             </div>
             <div class="step-content">
-              <div class="step-number">3</div>
+              <div class="step-number" aria-hidden="true">03</div>
+              <div class="step-label">
+                <span class="step-accent"></span>
+                <span class="step-tag">Étape 03</span>
+              </div>
               <h3>Discute et planifie</h3>
               <p>Échangez en direct pour organiser vos prochaines séances. Fini les séances solo, place au training à deux.</p>
             </div>
@@ -852,6 +929,8 @@
     <section class="section section--dark" id="why">
       <div class="section-blob why-blob--1" aria-hidden="true"></div>
       <div class="section-blob why-blob--2" aria-hidden="true"></div>
+      <div class="section-blob why-blob--3" aria-hidden="true"></div>
+      <div class="section-blob why-blob--4" aria-hidden="true"></div>
       <div class="section-inner">
         <p class="section-label gs-reveal">Ce qui nous différencie</p>
         <h2 class="section-title gs-reveal" style="color: var(--white);">Pourquoi MyGymBro</h2>
@@ -929,7 +1008,7 @@
           </div>
           <div class="stat-card gs-reveal">
             <div class="stat-value stat-value--text">France entière</div>
-            <div class="stat-label">Lancement 2026</div>
+            <div class="stat-label">Lancement septembre 2026</div>
           </div>
           <div class="stat-card gs-reveal">
             <div class="stat-value stat-value--text">Affinité sportive</div>

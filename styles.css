@@ -176,22 +176,33 @@ nav.nav--scrolled {
   }
   .nav-links {
     position: fixed;
-    top: 0; right: 0;
+    top: 8px;
+    right: 14px;
     width: 260px;
-    height: 100dvh;
-    height: 100vh;
-    background: rgba(10, 10, 10, 0.98);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    height: auto;
+    max-height: calc(100dvh - 16px);
+    background: rgba(10, 10, 10, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    box-shadow:
+      0 12px 40px rgba(0, 0, 0, 0.25);
     flex-direction: column;
     justify-content: center;
     gap: 32px;
-    transform: translateX(100%);
+    transform: translateX(calc(100% + 14px));
     transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    padding: 24px;
-    border-radius: 0;
-    border: none;
-    box-shadow: none;
+    padding: 48px 24px;
+  }
+  @supports (backdrop-filter: blur(1px)) {
+    .nav-links {
+      backdrop-filter: blur(20px) saturate(150%);
+      -webkit-backdrop-filter: blur(20px) saturate(150%);
+    }
+  }
+  @supports not (backdrop-filter: blur(1px)) {
+    .nav-links {
+      background: rgba(0, 0, 0, 0.9);
+    }
   }
   .nav-links.open {
     transform: translateX(0);

@@ -53,21 +53,30 @@ nav {
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.05);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
-  transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+  background: rgba(255, 255, 255, 0.01);
+  border: none;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.08),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.04);
+  transition: background 0.3s, box-shadow 0.3s, backdrop-filter 0.3s;
 }
 @supports (backdrop-filter: blur(1px)) {
   nav {
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    backdrop-filter: blur(8px) saturate(120%);
+    -webkit-backdrop-filter: blur(8px) saturate(120%);
   }
 }
 nav.nav--scrolled {
-  background: rgba(10, 10, 10, 0.6);
-  border-bottom-color: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  background: rgba(10, 10, 10, 0.25);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.18),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.03);
+}
+@supports (backdrop-filter: blur(1px)) {
+  nav.nav--scrolled {
+    backdrop-filter: blur(14px) saturate(150%);
+    -webkit-backdrop-filter: blur(14px) saturate(150%);
+  }
 }
 @supports not (backdrop-filter: blur(1px)) {
   nav {

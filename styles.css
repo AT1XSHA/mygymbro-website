@@ -161,8 +161,15 @@ nav.nav--scrolled {
 }
 
 @media (max-width: 768px) {
+  nav {
+    left: 8px;
+    right: 8px;
+    top: 8px;
+    border-radius: 16px;
+  }
   .nav-inner {
-    height: 56px;
+    height: 52px;
+    padding: 0 16px;
   }
   .nav-toggle {
     display: block;

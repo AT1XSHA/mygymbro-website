@@ -42,7 +42,7 @@
       align-items: center;
       justify-content: center;
       background: var(--black);
-      padding: 100px 24px 60px;
+      padding: 110px 24px 60px;
       position: relative;
       overflow: hidden;
     }
@@ -144,40 +144,48 @@
     .hero-mockup img {
       width: 100%;
       border-radius: 24px;
-      box-shadow: 0 32px 80px rgba(0,0,0,0.5), 0 0 60px rgba(50, 205, 50, 0.08);
+      box-shadow:
+        0 32px 80px rgba(0,0,0,0.5),
+        0 0 60px rgba(50, 205, 50, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
 
-    /* Store buttons */
-    .store-buttons {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
+    /* CTA button — liquid glass green */
+    .hero-cta {
       opacity: 0;
       transform: translateY(24px);
     }
-    .store-btn {
+    .cta-glass {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 14px 28px;
-      border-radius: 14px;
-      background: var(--white);
-      color: var(--black);
+      padding: 16px 36px;
+      border-radius: 16px;
+      background: rgba(50, 205, 50, 0.12);
+      border: 1px solid rgba(50, 205, 50, 0.3);
+      color: var(--green);
       text-decoration: none;
       font-weight: 700;
-      font-size: 15px;
+      font-size: 17px;
       font-family: var(--font-body);
-      transition: transform 0.25s, box-shadow 0.25s;
-      border: none;
+      transition: background 0.3s, box-shadow 0.3s, transform 0.25s;
       cursor: pointer;
     }
-    .store-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 30px rgba(50, 205, 50, 0.25);
+    .cta-glass:hover {
+      background: rgba(50, 205, 50, 0.22);
+      box-shadow: 0 0 40px rgba(50, 205, 50, 0.2);
+      transform: translateY(-2px);
     }
-    .store-btn svg {
-      width: 22px;
-      height: 22px;
+    @supports (backdrop-filter: blur(1px)) {
+      .cta-glass {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+    }
+    .beta-note {
+      font-size: 13px;
+      color: var(--gray-400);
+      margin-top: 14px;
     }
 
     /* ==============================
@@ -229,7 +237,7 @@
     }
 
     /* ==============================
-       HOW IT WORKS (Section 2)
+       HOW IT WORKS
        ============================== */
     .steps {
       display: flex;
@@ -255,6 +263,23 @@
     }
     .step-content {
       flex: 1;
+      padding: 32px 28px;
+      border-radius: 20px;
+      background: rgba(245, 245, 245, 0.8);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .step-content:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+    @supports (backdrop-filter: blur(1px)) {
+      .step-content {
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        background: rgba(255, 255, 255, 0.55);
+      }
     }
     .step-number {
       display: inline-flex;
@@ -301,7 +326,70 @@
     }
 
     /* ==============================
-       WHY MYGYMBRO (Section 3)
+       COACH SECTION
+       ============================== */
+    .coach-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .coach-card {
+      padding: 24px;
+      border-radius: 20px;
+      background: rgba(245, 245, 245, 0.8);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .coach-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+    @supports (backdrop-filter: blur(1px)) {
+      .coach-card {
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        background: rgba(255, 255, 255, 0.55);
+      }
+    }
+    .coach-card-mockup {
+      margin-bottom: 20px;
+    }
+    .coach-card-mockup img {
+      width: 100%;
+      max-width: 200px;
+      margin: 0 auto;
+      border-radius: 16px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+    }
+    .coach-card h3 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 17px;
+      margin-bottom: 8px;
+      color: var(--gray-900);
+    }
+    .coach-card p {
+      font-size: 14.5px;
+      line-height: 1.6;
+      color: var(--gray-700);
+    }
+    @media (max-width: 900px) {
+      .coach-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 560px) {
+      .coach-grid {
+        grid-template-columns: 1fr;
+        max-width: 320px;
+        margin: 0 auto;
+      }
+    }
+
+    /* ==============================
+       WHY MYGYMBRO
        ============================== */
     .args-grid {
       display: grid;
@@ -312,15 +400,22 @@
       padding: 32px 28px;
       border-radius: 20px;
       background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s, background 0.3s;
+    }
+    @supports (backdrop-filter: blur(1px)) {
+      .arg-card {
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        background: rgba(255, 255, 255, 0.06);
+      }
     }
     .arg-card:hover {
       transform: translateY(-4px) scale(1.02);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.3);
-      border-color: rgba(50, 205, 50, 0.15);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      border-color: rgba(50, 205, 50, 0.2);
+      background: rgba(255, 255, 255, 0.08);
     }
     .arg-icon {
       width: 48px;
@@ -366,17 +461,36 @@
     }
 
     /* ==============================
-       SOCIAL PROOF (Section 4)
+       SOCIAL PROOF
        ============================== */
     .stats-row {
       display: flex;
       justify-content: center;
-      gap: 60px;
+      gap: 32px;
       flex-wrap: wrap;
-      margin-bottom: 72px;
     }
-    .stat {
+    .stat-card {
       text-align: center;
+      padding: 32px 28px;
+      border-radius: 20px;
+      background: rgba(245, 245, 245, 0.8);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      flex: 1;
+      min-width: 200px;
+      max-width: 300px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+    @supports (backdrop-filter: blur(1px)) {
+      .stat-card {
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        background: rgba(255, 255, 255, 0.55);
+      }
     }
     .stat-value {
       font-family: var(--font-display);
@@ -386,65 +500,27 @@
       line-height: 1;
       margin-bottom: 8px;
     }
+    .stat-value--text {
+      font-size: clamp(20px, 3vw, 28px);
+      color: var(--gray-900);
+    }
     .stat-label {
       font-size: 15px;
       color: var(--gray-700);
-      max-width: 200px;
-    }
-    .testimonials {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      max-width: 960px;
-      margin: 0 auto;
-    }
-    .testimonial {
-      padding: 28px;
-      border-radius: 16px;
-      background: var(--gray-100);
-      border: 1px solid var(--gray-200);
-    }
-    .testimonial-text {
-      font-size: 15px;
-      line-height: 1.7;
-      color: var(--gray-700);
-      margin-bottom: 20px;
-      font-style: italic;
-    }
-    .testimonial-author {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .testimonial-avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--gray-200);
-      flex-shrink: 0;
-    }
-    .testimonial-name {
-      font-weight: 600;
-      font-size: 14px;
-      color: var(--gray-900);
-    }
-    .testimonial-role {
-      font-size: 13px;
-      color: var(--gray-400);
     }
 
     @media (max-width: 768px) {
       .stats-row {
-        gap: 40px;
+        gap: 16px;
       }
-      .testimonials {
-        grid-template-columns: 1fr;
-        max-width: 400px;
+      .stat-card {
+        min-width: 140px;
+        padding: 24px 16px;
       }
     }
 
     /* ==============================
-       CTA FINAL (Section 5)
+       CTA FINAL
        ============================== */
     .cta-section {
       position: relative;
@@ -517,8 +593,11 @@
         width: 220px;
         order: -1;
       }
-      .store-buttons {
+      .hero-cta {
         justify-content: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
       .cta-inner {
         flex-direction: column;
@@ -528,19 +607,34 @@
         width: 200px;
         order: -1;
       }
+      .cta-text .cta-glass {
+        margin: 0 auto;
+      }
       .section {
         padding: 72px 20px;
       }
     }
 
-    /* Disable heavy animations on mobile */
+    /* Mobile: reduce blur cost + hide blobs */
     @media (max-width: 768px) {
       .hero-blob {
         display: none;
       }
+      @supports (backdrop-filter: blur(1px)) {
+        .step-content,
+        .coach-card,
+        .stat-card {
+          backdrop-filter: blur(10px) saturate(150%);
+          -webkit-backdrop-filter: blur(10px) saturate(150%);
+        }
+        .arg-card {
+          backdrop-filter: blur(10px) saturate(150%);
+          -webkit-backdrop-filter: blur(10px) saturate(150%);
+        }
+      }
     }
 
-    /* Reduced motion: kill all custom animations */
+    /* Reduced motion */
     @media (prefers-reduced-motion: reduce) {
       .hero::before,
       .hero-blob {
@@ -548,7 +642,7 @@
       }
       .hero-text h1,
       .hero-text p,
-      .store-buttons,
+      .hero-cta,
       .hero-mockup {
         opacity: 1 !important;
         transform: none !important;
@@ -587,15 +681,11 @@
         <div class="hero-text">
           <h1>Trouve ton <em>partenaire</em> d'entraînement idéal</h1>
           <p>MyGymBro te connecte avec des sportifs qui partagent ta salle, ton niveau et tes objectifs. Fini les séances solo.</p>
-          <div class="store-buttons">
-            <a href="#" class="store-btn" onclick="return false">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-              App Store
+          <div class="hero-cta">
+            <a href="mailto:craftlabx@gmail.com?subject=Demande%20acc%C3%A8s%20b%C3%AAta%20MyGymBro" class="cta-glass">
+              Rejoins la bêta
             </a>
-            <a href="#" class="store-btn" onclick="return false">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.18 23.67L14.26 12.3 3.36.5c-.2-.2-.02-.63.3-.63l.76.01c.17 0 .34.07.46.18l12.3 11.04c.4.36.4.98 0 1.34L4.88 23.48a.64.64 0 01-.46.18l-.76.01c-.32 0-.5-.43-.3-.63l-.18.63z"/></svg>
-              Google Play
-            </a>
+            <p class="beta-note">Actuellement en bêta fermée — places limitées</p>
           </div>
         </div>
         <div class="hero-mockup">
@@ -607,9 +697,9 @@
     <!-- ===== SECTION 2 — COMMENT ÇA MARCHE ===== -->
     <section class="section section--light" id="how">
       <div class="section-inner">
-        <p class="section-label">Simple comme bonjour</p>
-        <h2 class="section-title">Comment ça marche</h2>
-        <p class="section-subtitle">Trois étapes pour trouver ton futur partenaire de training.</p>
+        <p class="section-label gs-reveal">Simple comme bonjour</p>
+        <h2 class="section-title gs-reveal">Comment ça marche</h2>
+        <p class="section-subtitle gs-reveal">Trois étapes pour trouver ton futur partenaire de training.</p>
 
         <div class="steps">
           <!-- Step 1 -->
@@ -651,12 +741,45 @@
       </div>
     </section>
 
-    <!-- ===== SECTION 3 — POURQUOI MYGYMBRO ===== -->
+    <!-- ===== SECTION 3 — COACH ===== -->
+    <section class="section section--light" id="coach">
+      <div class="section-inner">
+        <p class="section-label gs-reveal">Pour les coachs aussi</p>
+        <h2 class="section-title gs-reveal">Un coach à portée de swipe</h2>
+        <p class="section-subtitle gs-reveal">Trouve un coach certifié près de chez toi, consulte son profil et contacte-le directement.</p>
+
+        <div class="coach-grid">
+          <div class="coach-card gs-reveal">
+            <div class="coach-card-mockup">
+              <img src="assets/mockup-coaches-list.png" alt="Liste de coachs disponibles" width="360" height="720" loading="lazy">
+            </div>
+            <h3>Explore les coachs</h3>
+            <p>Parcours les profils de coachs certifiés disponibles dans ta zone.</p>
+          </div>
+          <div class="coach-card gs-reveal">
+            <div class="coach-card-mockup">
+              <img src="assets/mockup-coach-detail.png" alt="Profil détaillé d'un coach" width="360" height="720" loading="lazy">
+            </div>
+            <h3>Consulte leur profil</h3>
+            <p>Bio, certifications, spécialités, photos — tout est là pour choisir.</p>
+          </div>
+          <div class="coach-card gs-reveal">
+            <div class="coach-card-mockup">
+              <img src="assets/mockup-chat.png" alt="Chat avec un coach" width="360" height="720" loading="lazy">
+            </div>
+            <h3>Contacte directement</h3>
+            <p>Échange en direct et organise ta première séance de coaching.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 4 — POURQUOI MYGYMBRO ===== -->
     <section class="section section--dark" id="why">
       <div class="section-inner">
-        <p class="section-label">Ce qui nous différencie</p>
-        <h2 class="section-title" style="color: var(--white);">Pourquoi MyGymBro</h2>
-        <p class="section-subtitle">Pas une app de dating. Pas un réseau social fitness. Un outil conçu pour te faire progresser.</p>
+        <p class="section-label gs-reveal">Ce qui nous différencie</p>
+        <h2 class="section-title gs-reveal" style="color: var(--white);">Pourquoi MyGymBro</h2>
+        <p class="section-subtitle gs-reveal">Pas une app de dating. Pas un réseau social fitness. Un outil conçu pour te faire progresser.</p>
 
         <div class="args-grid">
           <!-- Matching par salle -->
@@ -704,94 +827,55 @@
             <p>Messagerie instantanée intégrée. Organise tes séances, partage tes tips, motive-toi à deux.</p>
           </div>
 
-          <!-- Gratuit -->
+          <!-- Gratuit en bêta -->
           <div class="arg-card gs-reveal">
             <div class="arg-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
             </div>
-            <h3>100% gratuit</h3>
-            <p>Swipe, match, discute — tout ça sans sortir ta carte. Les fonctionnalités essentielles sont et resteront gratuites.</p>
+            <h3>100% gratuit en bêta</h3>
+            <p>Swipe, match, discute — tout ça sans sortir ta carte. Toutes les fonctionnalités sont gratuites pendant la bêta.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ===== SECTION 4 — SOCIAL PROOF ===== -->
+    <!-- ===== SECTION 5 — SOCIAL PROOF ===== -->
     <section class="section section--light" id="proof">
       <div class="section-inner">
-        <p class="section-label">Ils nous font confiance</p>
-        <h2 class="section-title">Déjà adopté par la communauté</h2>
-        <p class="section-subtitle">MyGymBro grandit grâce à des sportifs motivés comme toi.</p>
+        <p class="section-label gs-reveal">La communauté</p>
+        <h2 class="section-title gs-reveal">Déjà adopté par des sportifs motivés</h2>
+        <p class="section-subtitle gs-reveal">MyGymBro grandit grâce à une communauté de passionnés.</p>
 
         <div class="stats-row">
-          <div class="stat gs-reveal">
+          <div class="stat-card gs-reveal">
             <div class="stat-value"><span class="counter" data-target="200">0</span>+</div>
             <div class="stat-label">Bêta-testeurs actifs</div>
           </div>
-          <div class="stat gs-reveal">
-            <div class="stat-value" style="font-size: clamp(24px, 3vw, 32px); color: var(--gray-900);">Brest et alentours</div>
+          <div class="stat-card gs-reveal">
+            <div class="stat-value stat-value--text">Brest et alentours</div>
             <div class="stat-label">Zone de lancement</div>
           </div>
-          <div class="stat gs-reveal">
-            <div class="stat-value" style="font-size: clamp(24px, 3vw, 32px); color: var(--gray-900);">Affinité sportive</div>
+          <div class="stat-card gs-reveal">
+            <div class="stat-value stat-value--text">Affinité sportive</div>
             <div class="stat-label">Algorithme de matching</div>
-          </div>
-        </div>
-
-        <div class="testimonials">
-          <div class="testimonial gs-reveal">
-            <p class="testimonial-text">"J'ai trouvé un partenaire de muscu en moins de 24h. On s'entraîne ensemble 4 fois par semaine maintenant."</p>
-            <div class="testimonial-author">
-              <div class="testimonial-avatar" aria-hidden="true"></div>
-              <div>
-                <div class="testimonial-name">Lucas, 24 ans</div>
-                <div class="testimonial-role">Musculation — Intermédiaire</div>
-              </div>
-            </div>
-          </div>
-          <div class="testimonial gs-reveal">
-            <p class="testimonial-text">"En tant que coach, l'app m'a permis de trouver de nouveaux clients dans ma salle. Interface top."</p>
-            <div class="testimonial-author">
-              <div class="testimonial-avatar" aria-hidden="true"></div>
-              <div>
-                <div class="testimonial-name">Sarah, 29 ans</div>
-                <div class="testimonial-role">Coach certifiée</div>
-              </div>
-            </div>
-          </div>
-          <div class="testimonial gs-reveal">
-            <p class="testimonial-text">"Enfin une app qui comprend que le training c'est mieux à plusieurs. Le matching par salle est génial."</p>
-            <div class="testimonial-author">
-              <div class="testimonial-avatar" aria-hidden="true"></div>
-              <div>
-                <div class="testimonial-name">Maxime, 27 ans</div>
-                <div class="testimonial-role">CrossFit — Confirmé</div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ===== SECTION 5 — CTA FINAL ===== -->
+    <!-- ===== SECTION 6 — CTA FINAL ===== -->
     <section class="section section--dark cta-section">
       <div class="section-inner cta-inner">
         <div class="cta-text gs-reveal">
           <h2>Prêt à trouver ton <em>training partner</em> ?</h2>
-          <p>Télécharge MyGymBro et rejoins la communauté de sportifs qui s'entraînent mieux, ensemble.</p>
-          <div class="store-buttons" style="opacity: 1; transform: none;">
-            <a href="#" class="store-btn" onclick="return false">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-              App Store
-            </a>
-            <a href="#" class="store-btn" onclick="return false">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.18 23.67L14.26 12.3 3.36.5c-.2-.2-.02-.63.3-.63l.76.01c.17 0 .34.07.46.18l12.3 11.04c.4.36.4.98 0 1.34L4.88 23.48a.64.64 0 01-.46.18l-.76.01c-.32 0-.5-.43-.3-.63l-.18.63z"/></svg>
-              Google Play
-            </a>
-          </div>
+          <p>Rejoins la bêta et fais partie des premiers à tester MyGymBro. Places limitées.</p>
+          <a href="mailto:craftlabx@gmail.com?subject=Demande%20acc%C3%A8s%20b%C3%AAta%20MyGymBro" class="cta-glass">
+            Rejoins la bêta
+          </a>
+          <p class="beta-note">Actuellement en bêta fermée — places limitées</p>
         </div>
         <div class="cta-mockup gs-reveal">
-          <img src="assets/mockup-discussion.png" alt="Chat MyGymBro" width="480" height="960" loading="lazy">
+          <img src="assets/mockup-onboarding.png" alt="Écran d'accueil MyGymBro" width="480" height="960" loading="lazy">
         </div>
       </div>
     </section>
@@ -808,7 +892,7 @@
         <a href="/cgu.html">CGU</a>
         <a href="/politique-confidentialite.html">Politique de confidentialité</a>
         <a href="/mentions-legales.html">Mentions légales</a>
-        <a href="mailto:contact@mygymbro.fr">Contact</a>
+        <a href="mailto:craftlabx@gmail.com">Contact</a>
       </div>
       <p class="footer-copy">&copy; 2026 MyGymBro — Tous droits réservés.</p>
     </div>
@@ -829,7 +913,6 @@
         toggle.classList.toggle('active');
         toggle.setAttribute('aria-expanded', isOpen);
       });
-      // Close on link click
       links.querySelectorAll('a').forEach(function(a) {
         a.addEventListener('click', function() {
           links.classList.remove('open');
@@ -852,7 +935,7 @@
         .to('.hero-mockup', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' })
         .to('.hero-text h1', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.5')
         .to('.hero-text p', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.4')
-        .to('.store-buttons', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.3');
+        .to('.hero-cta', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.3');
 
       // Hero mockup float
       gsap.to('.hero-mockup', {
@@ -863,26 +946,42 @@
         yoyo: true
       });
 
-      // Reveal elements on scroll
-      var reveals = document.querySelectorAll('.gs-reveal');
-      reveals.forEach(function(el) {
-        gsap.from(el, {
-          opacity: 0,
-          y: 50,
-          duration: 0.8,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: el,
-            start: 'top 85%',
-            once: true
+      // Scroll reveal — using fromTo to avoid flash
+      document.querySelectorAll('.gs-reveal').forEach(function(el) {
+        gsap.fromTo(el,
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 85%',
+              once: true
+            }
           }
-        });
+        );
+      });
+
+      // Stagger coach cards
+      gsap.fromTo('.coach-card', { opacity: 0, y: 40 }, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.15,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.coach-grid',
+          start: 'top 80%',
+          once: true
+        }
       });
 
       // Stagger arg cards
-      gsap.from('.arg-card', {
-        opacity: 0,
-        y: 40,
+      gsap.fromTo('.arg-card', { opacity: 0, y: 40 }, {
+        opacity: 1,
+        y: 0,
         duration: 0.6,
         stagger: 0.12,
         ease: 'power3.out',
@@ -893,29 +992,15 @@
         }
       });
 
-      // Stagger steps
-      gsap.from('.step', {
-        opacity: 0,
-        y: 50,
-        duration: 0.7,
-        stagger: 0.2,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.steps',
-          start: 'top 80%',
-          once: true
-        }
-      });
-
-      // Stagger testimonials
-      gsap.from('.testimonial', {
-        opacity: 0,
-        y: 30,
+      // Stagger stat cards
+      gsap.fromTo('.stat-card', { opacity: 0, y: 30 }, {
+        opacity: 1,
+        y: 0,
         duration: 0.6,
         stagger: 0.15,
         ease: 'power3.out',
         scrollTrigger: {
-          trigger: '.testimonials',
+          trigger: '.stats-row',
           start: 'top 85%',
           once: true
         }

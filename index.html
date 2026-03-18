@@ -64,7 +64,7 @@
     .hero-blob {
       position: absolute;
       pointer-events: none;
-      z-index: 0;
+      z-index: 1;
     }
     .hero-blob--1 {
       width: 500px; height: 500px;
@@ -107,7 +107,7 @@
 
     .hero-inner {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       max-width: 1200px;
       width: 100%;
       display: flex;
@@ -438,7 +438,7 @@
     .section-blob {
       position: absolute;
       pointer-events: none;
-      z-index: 0;
+      z-index: 1;
     }
     .section--dark {
       position: relative;
@@ -446,7 +446,7 @@
     }
     .section--dark .section-inner {
       position: relative;
-      z-index: 1;
+      z-index: 2;
     }
 
     /* "Pourquoi MyGymBro" blobs — positioned UNDER the cards grid */
@@ -530,28 +530,26 @@
     .arg-card {
       padding: 32px 28px;
       border-radius: 20px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.10);
       transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-      position: relative;
-      z-index: 1;
     }
     @supports (backdrop-filter: blur(1px)) {
       .arg-card {
-        backdrop-filter: blur(16px) saturate(160%);
-        -webkit-backdrop-filter: blur(16px) saturate(160%);
+        backdrop-filter: blur(16px) saturate(150%);
+        -webkit-backdrop-filter: blur(16px) saturate(150%);
       }
     }
     @supports not (backdrop-filter: blur(1px)) {
       .arg-card {
-        background: rgba(30, 30, 30, 0.92);
+        background: rgba(30, 30, 30, 0.90);
       }
     }
     .arg-card:hover {
+      border-color: rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.05);
       transform: translateY(-4px) scale(1.02);
-      border-color: rgba(255, 255, 255, 0.25);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(50, 205, 50, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.15);
     }
     .arg-icon {
       width: 48px;
@@ -667,7 +665,7 @@
       justify-content: center;
       gap: 60px;
       position: relative;
-      z-index: 1;
+      z-index: 2;
     }
     .cta-text {
       max-width: 480px;
@@ -829,6 +827,9 @@
             </a>
             <p class="beta-note">Actuellement en bêta fermée — places limitées</p>
           </div>
+        </div>
+        <div class="hero-mockup">
+          <img src="assets/mockup-intro.png" alt="Écran d'accueil MyGymBro" width="560" height="1120">
         </div>
       </div>
     </section>

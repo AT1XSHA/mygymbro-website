@@ -208,6 +208,37 @@ footer {
 .footer-logo-text span {
   color: var(--green);
 }
+/* Instagram link */
+.footer-social {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+.footer-ig {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 22px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--white);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.3s, border-color 0.3s, transform 0.25s;
+}
+.footer-ig svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.footer-ig:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+
 .footer-links {
   display: flex;
   gap: 24px;

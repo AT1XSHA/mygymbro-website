@@ -163,6 +163,8 @@
       width: 280px;
       opacity: 0;
       transform: translateY(30px);
+      position: relative;
+      z-index: 4;
     }
     .hero-mockup img {
       width: 100%;
@@ -279,6 +281,7 @@
     .step-mockup {
       flex: 0 0 240px;
       position: relative;
+      z-index: 4;
     }
     .step-mockup img {
       width: 100%;
@@ -415,6 +418,8 @@
     }
     .coach-card-mockup {
       margin-bottom: 20px;
+      position: relative;
+      z-index: 4;
     }
     .coach-card-mockup img {
       width: 100%;
@@ -707,6 +712,8 @@
     .cta-mockup {
       flex: 0 0 auto;
       width: 240px;
+      position: relative;
+      z-index: 4;
     }
     .cta-mockup img {
       width: 100%;
@@ -1227,22 +1234,57 @@
 
     })();
 
-    // --- 3D Particle mesh — fullpage ---
+    // --- 3D Grid Mesh — fullpage ---
     (function() {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      var isMobile = window.innerWidth < 768;
 
       var canvas = document.getElementById('particles-bg');
       if (!canvas) return;
       var ctx = canvas.getContext('2d');
-      var particles = [];
-      var PARTICLE_COUNT = isMobile ? 40 : 120;
-      var CONNECTION_DIST = isMobile ? 120 : 160;
+      var isMobile = window.innerWidth < 768;
+      var SPACING = isMobile ? 50 : 35;
+      var DOT_SIZE = isMobile ? 1.2 : 1.5;
+      var WAVE_SPEED = 0.008;
+      var WAVE_AMP = isMobile ? 8 : 14;
+      var MOUSE_RADIUS = isMobile ? 80 : 180;
+      var MOUSE_PUSH = isMobile ? 15 : 30;
       var mouse = { x: -9999, y: -9999 };
+      var time = 0;
+      var cols, rows, points;
+
+      // Detect dark sections
+      var darkSections = [];
+      document.querySelectorAll('.hero, .section--dark').forEach(function(s) {
+        darkSections.push(s);
+      });
+
+      function isDark(screenY) {
+        var scrollY = window.scrollY || window.pageYOffset;
+        var absY = scrollY + screenY;
+        for (var i = 0; i < darkSections.length; i++) {
+          var rect = darkSections[i].getBoundingClientRect();
+          var top = scrollY + rect.top;
+          var bottom = top + rect.height;
+          if (absY >= top && absY <= bottom) return true;
+        }
+        return false;
+      }
 
       function resize() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
+        cols = Math.ceil(canvas.width / SPACING) + 2;
+        rows = Math.ceil(canvas.height / SPACING) + 2;
+        points = [];
+        for (var r = 0; r < rows; r++) {
+          for (var c = 0; c < cols; c++) {
+            points.push({
+              baseX: c * SPACING - SPACING,
+              baseY: r * SPACING - SPACING,
+              x: 0, y: 0
+            });
+          }
+        }
       }
       resize();
       window.addEventListener('resize', resize);
@@ -1251,96 +1293,78 @@
         mouse.x = e.clientX;
         mouse.y = e.clientY;
       });
-
-      for (var i = 0; i < PARTICLE_COUNT; i++) {
-        particles.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          z: Math.random(),
-          vx: (Math.random() - 0.5) * 0.5,
-          vy: (Math.random() - 0.5) * 0.5,
-          vz: (Math.random() - 0.5) * 0.004,
-          size: Math.random() * 3.5 + 1.2
-        });
-      }
-
-      // Detect which sections are dark vs light
-      var darkSections = [];
-      document.querySelectorAll('.hero, .section--dark').forEach(function(s) {
-        darkSections.push(s);
+      window.addEventListener('mouseleave', function() {
+        mouse.x = -9999;
+        mouse.y = -9999;
       });
-
-      function isDark(y) {
-        var scrollY = window.scrollY || window.pageYOffset;
-        var screenY = scrollY + y;
-        for (var i = 0; i < darkSections.length; i++) {
-          var rect = darkSections[i].getBoundingClientRect();
-          var top = scrollY + rect.top;
-          var bottom = top + rect.height;
-          if (screenY >= top && screenY <= bottom) return true;
-        }
-        return false;
-      }
 
       function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        time += WAVE_SPEED;
 
-        for (var i = 0; i < particles.length; i++) {
-          var p = particles[i];
-          p.x += p.vx;
-          p.y += p.vy;
-          p.z += p.vz;
-          if (p.z > 1) p.vz *= -1;
-          if (p.z < 0) p.vz *= -1;
-          if (p.x < -20) p.x = canvas.width + 20;
-          if (p.x > canvas.width + 20) p.x = -20;
-          if (p.y < -20) p.y = canvas.height + 20;
-          if (p.y > canvas.height + 20) p.y = -20;
+        // Update point positions with wave + mouse
+        for (var i = 0; i < points.length; i++) {
+          var p = points[i];
+          var waveX = Math.sin(p.baseY * 0.02 + time) * WAVE_AMP;
+          var waveY = Math.cos(p.baseX * 0.02 + time * 0.7) * WAVE_AMP;
+          p.x = p.baseX + waveX;
+          p.y = p.baseY + waveY;
 
-          var scale = 0.4 + p.z * 0.6;
-          var dark = isDark(p.y);
-          if (!dark) { p.dx = p.x; p.dy = p.y; p.alpha = 0; p.color = '0,0,0'; continue; }
-          var alpha = 0.20 + p.z * 0.35;
-          var color = '50, 205, 50';
-          var r = p.size * scale;
-
+          // Mouse push
           var dx = p.x - mouse.x;
           var dy = p.y - mouse.y;
           var dist = Math.sqrt(dx * dx + dy * dy);
-          var drawX = p.x;
-          var drawY = p.y;
-          if (dist < 220) {
-            var push = (1 - dist / 220) * 18 * p.z;
-            drawX += (dx / dist) * push;
-            drawY += (dy / dist) * push;
+          if (dist < MOUSE_RADIUS && dist > 0) {
+            var force = (1 - dist / MOUSE_RADIUS) * MOUSE_PUSH;
+            p.x += (dx / dist) * force;
+            p.y += (dy / dist) * force;
           }
-
-          ctx.beginPath();
-          ctx.arc(drawX, drawY, r, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(' + color + ', ' + alpha + ')';
-          ctx.fill();
-          p.dx = drawX;
-          p.dy = drawY;
-          p.alpha = alpha;
-          p.color = color;
         }
 
-        for (var i = 0; i < particles.length; i++) {
-          for (var j = i + 1; j < particles.length; j++) {
-            var a = particles[i];
-            var b = particles[j];
-            var dx = a.dx - b.dx;
-            var dy = a.dy - b.dy;
-            var dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < CONNECTION_DIST) {
-              var lineAlpha = (1 - dist / CONNECTION_DIST) * Math.min(a.alpha, b.alpha) * 0.7;
-              ctx.beginPath();
-              ctx.moveTo(a.dx, a.dy);
-              ctx.lineTo(b.dx, b.dy);
-              ctx.strokeStyle = 'rgba(' + a.color + ', ' + lineAlpha + ')';
-              ctx.lineWidth = 1;
-              ctx.stroke();
+        // Draw grid lines + dots
+        for (var r = 0; r < rows; r++) {
+          for (var c = 0; c < cols; c++) {
+            var idx = r * cols + c;
+            var p = points[idx];
+            var dark = isDark(p.y);
+            if (!dark) continue;
+
+            // Depth based on wave displacement
+            var depth = (Math.sin(p.baseX * 0.015 + p.baseY * 0.015 + time) + 1) * 0.5;
+            var alpha = 0.15 + depth * 0.3;
+            var dotAlpha = 0.25 + depth * 0.4;
+
+            // Draw line to right neighbor
+            if (c < cols - 1) {
+              var right = points[idx + 1];
+              if (isDark(right.y)) {
+                ctx.beginPath();
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(right.x, right.y);
+                ctx.strokeStyle = 'rgba(50, 205, 50, ' + (alpha * 0.5) + ')';
+                ctx.lineWidth = 0.6;
+                ctx.stroke();
+              }
             }
+
+            // Draw line to bottom neighbor
+            if (r < rows - 1) {
+              var bottom = points[idx + cols];
+              if (isDark(bottom.y)) {
+                ctx.beginPath();
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(bottom.x, bottom.y);
+                ctx.strokeStyle = 'rgba(50, 205, 50, ' + (alpha * 0.5) + ')';
+                ctx.lineWidth = 0.6;
+                ctx.stroke();
+              }
+            }
+
+            // Draw dot
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, DOT_SIZE + depth * 1.2, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(50, 205, 50, ' + dotAlpha + ')';
+            ctx.fill();
           }
         }
 

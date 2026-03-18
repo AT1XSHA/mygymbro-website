@@ -47,6 +47,22 @@
       overflow: hidden;
     }
 
+    /* 3D particle canvas — fullpage */
+    #particles-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 3;
+      opacity: 0.7;
+      pointer-events: none;
+    }
+    .section--light {
+      position: relative;
+      overflow: hidden;
+    }
+
     /* Animated gradient background */
     .hero::before {
       content: '';
@@ -273,9 +289,9 @@
       flex: 1;
       padding: 36px 32px;
       border-radius: 20px;
-      background: rgba(255, 255, 255, 0.35);
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.5);
       transition: transform 0.3s, box-shadow 0.3s;
       position: relative;
       overflow: hidden;
@@ -381,9 +397,9 @@
     .coach-card {
       padding: 24px;
       border-radius: 20px;
-      background: rgba(255, 255, 255, 0.35);
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.5);
       text-align: center;
       transition: transform 0.3s, box-shadow 0.3s;
     }
@@ -607,9 +623,9 @@
       text-align: center;
       padding: 32px 28px;
       border-radius: 20px;
-      background: rgba(255, 255, 255, 0.35);
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.5);
       flex: 1;
       min-width: 200px;
       max-width: 300px;
@@ -791,6 +807,8 @@
   </style>
 </head>
 <body>
+
+  <canvas id="particles-bg" aria-hidden="true"></canvas>
 
   <!-- NAV -->
   <nav aria-label="Navigation principale">
@@ -1207,6 +1225,126 @@
         });
       });
 
+    })();
+
+    // --- 3D Particle mesh — fullpage ---
+    (function() {
+      if (window.innerWidth < 768 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      var canvas = document.getElementById('particles-bg');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var particles = [];
+      var PARTICLE_COUNT = 120;
+      var CONNECTION_DIST = 160;
+      var mouse = { x: -9999, y: -9999 };
+
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      window.addEventListener('mousemove', function(e) {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+      });
+
+      for (var i = 0; i < PARTICLE_COUNT; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          z: Math.random(),
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: (Math.random() - 0.5) * 0.5,
+          vz: (Math.random() - 0.5) * 0.004,
+          size: Math.random() * 3.5 + 1.2
+        });
+      }
+
+      // Detect which sections are dark vs light
+      var darkSections = [];
+      document.querySelectorAll('.hero, .section--dark').forEach(function(s) {
+        darkSections.push(s);
+      });
+
+      function isDark(y) {
+        var scrollY = window.scrollY || window.pageYOffset;
+        var screenY = scrollY + y;
+        for (var i = 0; i < darkSections.length; i++) {
+          var rect = darkSections[i].getBoundingClientRect();
+          var top = scrollY + rect.top;
+          var bottom = top + rect.height;
+          if (screenY >= top && screenY <= bottom) return true;
+        }
+        return false;
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (var i = 0; i < particles.length; i++) {
+          var p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          p.z += p.vz;
+          if (p.z > 1) p.vz *= -1;
+          if (p.z < 0) p.vz *= -1;
+          if (p.x < -20) p.x = canvas.width + 20;
+          if (p.x > canvas.width + 20) p.x = -20;
+          if (p.y < -20) p.y = canvas.height + 20;
+          if (p.y > canvas.height + 20) p.y = -20;
+
+          var scale = 0.4 + p.z * 0.6;
+          var dark = isDark(p.y);
+          var alpha = dark ? 0.20 + p.z * 0.35 : 0.12 + p.z * 0.22;
+          var color = dark ? '50, 205, 50' : '40, 40, 40';
+          var r = p.size * scale;
+
+          var dx = p.x - mouse.x;
+          var dy = p.y - mouse.y;
+          var dist = Math.sqrt(dx * dx + dy * dy);
+          var drawX = p.x;
+          var drawY = p.y;
+          if (dist < 220) {
+            var push = (1 - dist / 220) * 18 * p.z;
+            drawX += (dx / dist) * push;
+            drawY += (dy / dist) * push;
+          }
+
+          ctx.beginPath();
+          ctx.arc(drawX, drawY, r, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(' + color + ', ' + alpha + ')';
+          ctx.fill();
+          p.dx = drawX;
+          p.dy = drawY;
+          p.alpha = alpha;
+          p.color = color;
+        }
+
+        for (var i = 0; i < particles.length; i++) {
+          for (var j = i + 1; j < particles.length; j++) {
+            var a = particles[i];
+            var b = particles[j];
+            var dx = a.dx - b.dx;
+            var dy = a.dy - b.dy;
+            var dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < CONNECTION_DIST) {
+              var lineAlpha = (1 - dist / CONNECTION_DIST) * Math.min(a.alpha, b.alpha) * 0.7;
+              ctx.beginPath();
+              ctx.moveTo(a.dx, a.dy);
+              ctx.lineTo(b.dx, b.dy);
+              ctx.strokeStyle = 'rgba(' + a.color + ', ' + lineAlpha + ')';
+              ctx.lineWidth = 1;
+              ctx.stroke();
+            }
+          }
+        }
+
+        requestAnimationFrame(draw);
+      }
+      draw();
     })();
   </script>
 

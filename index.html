@@ -1229,14 +1229,15 @@
 
     // --- 3D Particle mesh — fullpage ---
     (function() {
-      if (window.innerWidth < 768 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var isMobile = window.innerWidth < 768;
 
       var canvas = document.getElementById('particles-bg');
       if (!canvas) return;
       var ctx = canvas.getContext('2d');
       var particles = [];
-      var PARTICLE_COUNT = 120;
-      var CONNECTION_DIST = 160;
+      var PARTICLE_COUNT = isMobile ? 40 : 120;
+      var CONNECTION_DIST = isMobile ? 120 : 160;
       var mouse = { x: -9999, y: -9999 };
 
       function resize() {

@@ -162,8 +162,8 @@ nav.nav--scrolled {
 
 @media (max-width: 768px) {
   nav {
-    left: 8px;
-    right: 8px;
+    left: 14px;
+    right: 14px;
     top: 8px;
     border-radius: 16px;
   }

@@ -5,69 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Conditions Générales d'Utilisation — MyGymBro</title>
   <meta name="description" content="Conditions Générales d'Utilisation de l'application MyGymBro.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    :root {
-      --green: #32CD32;
-      --black: #0A0A0A;
-      --gray-900: #1A1A1A;
-      --gray-700: #3A3A3A;
-      --gray-400: #999;
-      --gray-200: #E5E5E5;
-      --gray-100: #F5F5F5;
-      --white: #FFFFFF;
-      --font-display: 'Plus Jakarta Sans', sans-serif;
-      --font-body: 'DM Sans', sans-serif;
-    }
-    body { font-family: var(--font-body); color: var(--gray-900); background: var(--white); -webkit-font-smoothing: antialiased; }
-
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(10,10,10,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.06); }
-    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
-    .logo { font-family: var(--font-display); font-weight: 800; font-size: 20px; color: var(--white); text-decoration: none; }
-    .logo span { color: var(--green); }
-    .nav-links { display: flex; gap: 28px; }
-    .nav-links a { color: var(--gray-400); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--white); }
-
-    .page-header { background: var(--black); padding: 120px 24px 60px; text-align: center; }
-    .page-header h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(28px, 5vw, 42px); color: var(--white); }
-    .page-header p { color: var(--gray-400); margin-top: 12px; font-size: 15px; }
-
-    .content { max-width: 780px; margin: 0 auto; padding: 60px 24px 100px; }
-    .content h2 { font-family: var(--font-display); font-weight: 700; font-size: 22px; margin: 48px 0 16px; padding-top: 16px; border-top: 1px solid var(--gray-200); }
-    .content h2:first-of-type { margin-top: 0; border-top: none; padding-top: 0; }
-    .content h3 { font-family: var(--font-display); font-weight: 600; font-size: 17px; margin: 28px 0 10px; }
-    .content p { font-size: 15px; line-height: 1.75; color: var(--gray-700); margin-bottom: 14px; }
-    .content ul, .content ol { margin: 10px 0 14px 24px; }
-    .content li { font-size: 15px; line-height: 1.75; color: var(--gray-700); margin-bottom: 6px; }
-    .content strong { color: var(--gray-900); }
-    .content a { color: var(--green); text-decoration: none; }
-    .content a:hover { text-decoration: underline; }
-
-    footer { background: var(--black); padding: 48px 24px; text-align: center; }
-    .footer-inner { max-width: 1100px; margin: 0 auto; }
-    .footer-logo { font-family: var(--font-display); font-weight: 800; font-size: 18px; color: var(--white); margin-bottom: 20px; }
-    .footer-logo span { color: var(--green); }
-    .footer-links { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; }
-    .footer-links a { color: var(--gray-400); text-decoration: none; font-size: 14px; transition: color 0.2s; }
-    .footer-links a:hover { color: var(--white); }
-    .footer-copy { color: var(--gray-700); font-size: 13px; }
-
-    @media (max-width: 600px) { .nav-links { gap: 16px; } .nav-links a { font-size: 13px; } }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <nav>
+  <nav aria-label="Navigation principale">
     <div class="nav-inner">
-      <a href="/" class="logo">MyGym<span>Bro</span></a>
+      <a href="/" class="nav-logo">
+        <img src="assets/logo-white.svg" alt="MyGymBro" width="120" height="28">
+      </a>
+      <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
       <div class="nav-links">
-        <a href="/cgu">CGU</a>
-        <a href="/politique-confidentialite">Confidentialité</a>
-        <a href="/mentions-legales">Mentions légales</a>
+        <a href="/cgu.html">CGU</a>
+        <a href="/politique-confidentialite.html">Confidentialité</a>
+        <a href="/mentions-legales.html">Mentions légales</a>
       </div>
     </div>
   </nav>
@@ -77,13 +34,13 @@
     <p>Dernière mise à jour : 18 mars 2026</p>
   </div>
 
-  <div class="content">
+  <main class="content">
 
     <h2>1. Présentation générale</h2>
 
     <h3>1.1. Éditeur de l'Application</h3>
     <p><strong>MyGymBro</strong> est éditée par Fabian Schmidt, personne physique.<br>
-    E-mail de contact : <a href="mailto:craftlabx@gmail.com">craftlabx@gmail.com</a></p>
+    E-mail de contact : <a href="mailto:contact@mygymbro.fr">contact@mygymbro.fr</a></p>
 
     <h3>1.2. L'Application</h3>
     <p>MyGymBro (ci-après « l'Application ») est une plateforme mobile de mise en relation permettant aux Utilisateurs de trouver des partenaires d'entraînement, des coachs sportifs et d'autres personnes partageant leurs objectifs fitness, selon leur salle de sport, leur niveau et leurs préférences.</p>
@@ -116,23 +73,13 @@
     <p>Toute action réalisée via l'Application après utilisation du code OTP est présumée être effectuée par l'Utilisateur lui-même, sauf preuve contraire.</p>
 
     <h3>3.3. Sécurité du compte</h3>
-    <p>L'Utilisateur doit veiller à la confidentialité de son code OTP et prévenir immédiatement l'Éditeur (<a href="mailto:craftlabx@gmail.com">craftlabx@gmail.com</a>) s'il suspecte un accès non autorisé à son compte. En cas de négligence, l'Utilisateur supporte l'entière responsabilité de l'usage qui est fait de son compte.</p>
+    <p>L'Utilisateur doit veiller à la confidentialité de son code OTP et prévenir immédiatement l'Éditeur (<a href="mailto:contact@mygymbro.fr">contact@mygymbro.fr</a>) s'il suspecte un accès non autorisé à son compte. En cas de négligence, l'Utilisateur supporte l'entière responsabilité de l'usage qui est fait de son compte.</p>
 
     <h2>4. Suppression et suspension de compte</h2>
 
     <h3>4.1. Suppression par l'Utilisateur</h3>
-    <p>L'Utilisateur peut supprimer son compte à tout moment depuis les paramètres de l'Application ou en écrivant à <a href="mailto:craftlabx@gmail.com">craftlabx@gmail.com</a>.</p>
-    <p>La suppression du compte est définitive et entraîne la suppression de l'ensemble des données associées : profil, photos, messages, conversations, matchs, notifications, et toute autre donnée personnelle, conformément à notre <a href="/politique-confidentialite">Politique de confidentialité</a>.</p>
-
-    <h3>4.2. Suspension ou suppression par l'Éditeur</h3>
-    <p>L'Éditeur se réserve le droit de suspendre ou de supprimer un compte, sans préavis, en cas de :</p>
-    <ul>
-      <li>Violation des présentes CGU</li>
-      <li>Fausse déclaration sur l'âge ou l'identité</li>
-      <li>Comportement inapproprié, illicite ou nuisible envers d'autres Utilisateurs</li>
-      <li>Signalements multiples de la part d'autres Utilisateurs</li>
-      <li>Utilisation de l'Application à des fins commerciales non autorisées</li>
-    </ul>
+    <p>L'Utilisateur peut supprimer son compte à tout moment depuis les paramètres de l'Application ou en écrivant à <a href="mailto:contact@mygymbro.fr">contact@mygymbro.fr</a>.</p>
+    <p>La suppression du compte est définitive et entraîne la suppression de l'ensemble des données associées : profil, photos, messages, conversations, matchs, notifications, et toute autre donnée personnelle, conformément à notre <a href="/politique-confidentialite.html">Politique de confidentialité</a>.</p>
 
     <h2>5. Utilisation de l'Application</h2>
 
@@ -236,25 +183,47 @@
     <p>Les présentes CGU sont régies par le droit français. En cas de litige, et à défaut de résolution amiable, les tribunaux compétents sont ceux du ressort du domicile de l'Éditeur, sauf dispositions d'ordre public contraires.</p>
 
     <h3>12.5. Contact</h3>
-    <p>Pour toute question relative aux présentes CGU : <a href="mailto:craftlabx@gmail.com">craftlabx@gmail.com</a></p>
+    <p>Pour toute question relative aux présentes CGU : <a href="mailto:contact@mygymbro.fr">contact@mygymbro.fr</a></p>
 
     <h2>Acceptation</h2>
     <p>En créant un compte sur MyGymBro, l'Utilisateur déclare avoir lu et compris les présentes CGU, confirme avoir 18 ans ou plus, et accepte l'ensemble de ces conditions. Le non-respect de ces dispositions peut entraîner la suppression du compte, sans préavis.</p>
 
-  </div>
+  </main>
 
   <footer>
     <div class="footer-inner">
-      <div class="footer-logo">MyGym<span>Bro</span></div>
-      <div class="footer-links">
-        <a href="/cgu">CGU</a>
-        <a href="/politique-confidentialite">Politique de confidentialité</a>
-        <a href="/mentions-legales">Mentions légales</a>
-        <a href="mailto:craftlabx@gmail.com">Contact</a>
+      <div class="footer-logo">
+        <img src="assets/logo-white.svg" alt="MyGymBro" width="100" height="24">
       </div>
-      <p class="footer-copy">© 2026 MyGymBro — Tous droits réservés.</p>
+      <div class="footer-links">
+        <a href="/cgu.html">CGU</a>
+        <a href="/politique-confidentialite.html">Politique de confidentialité</a>
+        <a href="/mentions-legales.html">Mentions légales</a>
+        <a href="mailto:contact@mygymbro.fr">Contact</a>
+      </div>
+      <p class="footer-copy">&copy; 2026 MyGymBro — Tous droits réservés.</p>
     </div>
   </footer>
+
+  <script>
+    (function() {
+      var toggle = document.querySelector('.nav-toggle');
+      var links = document.querySelector('.nav-links');
+      if (!toggle || !links) return;
+      toggle.addEventListener('click', function() {
+        var isOpen = links.classList.toggle('open');
+        toggle.classList.toggle('active');
+        toggle.setAttribute('aria-expanded', isOpen);
+      });
+      links.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+          links.classList.remove('open');
+          toggle.classList.remove('active');
+          toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    })();
+  </script>
 
 </body>
 </html>

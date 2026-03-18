@@ -1298,8 +1298,9 @@
 
           var scale = 0.4 + p.z * 0.6;
           var dark = isDark(p.y);
-          var alpha = dark ? 0.20 + p.z * 0.35 : 0.12 + p.z * 0.22;
-          var color = dark ? '50, 205, 50' : '40, 40, 40';
+          if (!dark) { p.dx = p.x; p.dy = p.y; p.alpha = 0; p.color = '0,0,0'; continue; }
+          var alpha = 0.20 + p.z * 0.35;
+          var color = '50, 205, 50';
           var r = p.size * scale;
 
           var dx = p.x - mouse.x;

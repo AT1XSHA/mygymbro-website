@@ -42,7 +42,7 @@
       align-items: center;
       justify-content: center;
       background: var(--black);
-      padding: 110px 24px 60px;
+      padding: 128px 24px 60px;
       position: relative;
       overflow: hidden;
     }
@@ -389,6 +389,68 @@
     }
 
     /* ==============================
+       SECTION BLOBS (dark bg glass enhancer)
+       ============================== */
+    .section-blob {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .section--dark {
+      position: relative;
+      overflow: hidden;
+    }
+    .section--dark .section-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* "Pourquoi MyGymBro" blobs */
+    .why-blob--1 {
+      width: 450px; height: 450px;
+      top: -120px; left: -80px;
+      background: rgba(50, 205, 50, 0.1);
+      filter: blur(100px);
+      animation: sectionFloat1 18s ease-in-out infinite alternate;
+    }
+    .why-blob--2 {
+      width: 350px; height: 350px;
+      bottom: -80px; right: -60px;
+      background: rgba(30, 60, 120, 0.07);
+      filter: blur(90px);
+      animation: sectionFloat2 15s ease-in-out infinite alternate;
+      animation-delay: -5s;
+    }
+
+    /* CTA blobs */
+    .cta-blob--1 {
+      width: 400px; height: 400px;
+      top: -100px; right: 20%;
+      background: rgba(50, 205, 50, 0.09);
+      filter: blur(100px);
+      animation: sectionFloat1 16s ease-in-out infinite alternate;
+      animation-delay: -3s;
+    }
+    .cta-blob--2 {
+      width: 300px; height: 300px;
+      bottom: -60px; left: -40px;
+      background: rgba(30, 60, 120, 0.06);
+      filter: blur(80px);
+      animation: sectionFloat2 20s ease-in-out infinite alternate;
+      animation-delay: -8s;
+    }
+
+    @keyframes sectionFloat1 {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(25px, -20px); }
+    }
+    @keyframes sectionFloat2 {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-20px, 30px); }
+    }
+
+    /* ==============================
        WHY MYGYMBRO
        ============================== */
     .args-grid {
@@ -615,10 +677,21 @@
       }
     }
 
-    /* Mobile: reduce blur cost + hide blobs */
+    /* Mobile: reduce blur cost, simplify blobs */
     @media (max-width: 768px) {
       .hero-blob {
         display: none;
+      }
+      .section-blob {
+        animation: none !important;
+      }
+      .why-blob--2,
+      .cta-blob--2 {
+        display: none;
+      }
+      .why-blob--1,
+      .cta-blob--1 {
+        width: 250px; height: 250px;
       }
       @supports (backdrop-filter: blur(1px)) {
         .step-content,
@@ -637,7 +710,8 @@
     /* Reduced motion */
     @media (prefers-reduced-motion: reduce) {
       .hero::before,
-      .hero-blob {
+      .hero-blob,
+      .section-blob {
         animation: none !important;
       }
       .hero-text h1,
@@ -765,7 +839,7 @@
           </div>
           <div class="coach-card gs-reveal">
             <div class="coach-card-mockup">
-              <img src="assets/mockup-chat.png" alt="Chat avec un coach" width="360" height="720" loading="lazy">
+              <img src="assets/mockup-chat-reply.png" alt="Chat avec un coach" width="360" height="720" loading="lazy">
             </div>
             <h3>Contacte directement</h3>
             <p>Échange en direct et organise ta première séance de coaching.</p>
@@ -776,6 +850,8 @@
 
     <!-- ===== SECTION 4 — POURQUOI MYGYMBRO ===== -->
     <section class="section section--dark" id="why">
+      <div class="section-blob why-blob--1" aria-hidden="true"></div>
+      <div class="section-blob why-blob--2" aria-hidden="true"></div>
       <div class="section-inner">
         <p class="section-label gs-reveal">Ce qui nous différencie</p>
         <h2 class="section-title gs-reveal" style="color: var(--white);">Pourquoi MyGymBro</h2>
@@ -852,8 +928,8 @@
             <div class="stat-label">Bêta-testeurs actifs</div>
           </div>
           <div class="stat-card gs-reveal">
-            <div class="stat-value stat-value--text">Brest et alentours</div>
-            <div class="stat-label">Zone de lancement</div>
+            <div class="stat-value stat-value--text">France entière</div>
+            <div class="stat-label">Lancement 2026</div>
           </div>
           <div class="stat-card gs-reveal">
             <div class="stat-value stat-value--text">Affinité sportive</div>
@@ -865,6 +941,8 @@
 
     <!-- ===== SECTION 6 — CTA FINAL ===== -->
     <section class="section section--dark cta-section">
+      <div class="section-blob cta-blob--1" aria-hidden="true"></div>
+      <div class="section-blob cta-blob--2" aria-hidden="true"></div>
       <div class="section-inner cta-inner">
         <div class="cta-text gs-reveal">
           <h2>Prêt à trouver ton <em>training partner</em> ?</h2>
@@ -920,6 +998,19 @@
           toggle.setAttribute('aria-expanded', 'false');
         });
       });
+    })();
+
+    // --- Nav scroll transition ---
+    (function() {
+      var nav = document.querySelector('nav');
+      if (!nav) return;
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+          nav.classList.add('nav--scrolled');
+        } else {
+          nav.classList.remove('nav--scrolled');
+        }
+      }, { passive: true });
     })();
 
     // --- GSAP animations (skip if reduced motion) ---

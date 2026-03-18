@@ -214,6 +214,152 @@
     }
 
     /* ==============================
+       BETA MODAL
+       ============================== */
+    .beta-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+    @supports (backdrop-filter: blur(1px)) {
+      .beta-overlay {
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+    }
+    .beta-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .beta-modal {
+      background: rgba(20, 20, 20, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 24px;
+      padding: 40px;
+      max-width: 420px;
+      width: calc(100% - 32px);
+      position: relative;
+      transform: scale(0.95);
+      transition: transform 0.3s;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+    @supports (backdrop-filter: blur(1px)) {
+      .beta-modal {
+        background: rgba(20, 20, 20, 0.7);
+        backdrop-filter: blur(24px) saturate(180%);
+        -webkit-backdrop-filter: blur(24px) saturate(180%);
+      }
+    }
+    .beta-overlay.active .beta-modal {
+      transform: scale(1);
+    }
+    .beta-modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: var(--gray-400);
+      font-size: 24px;
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      transition: color 0.2s, background 0.2s;
+    }
+    .beta-modal-close:hover {
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .beta-modal h3 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 24px;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .beta-modal .beta-subtitle {
+      font-size: 15px;
+      color: var(--gray-400);
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+    .beta-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .beta-form input {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .beta-form input::placeholder {
+      color: var(--gray-400);
+    }
+    .beta-form input:focus {
+      border-color: rgba(50, 205, 50, 0.4);
+    }
+    .beta-form .cta-glass {
+      width: 100%;
+      justify-content: center;
+      margin-top: 4px;
+    }
+    .beta-success {
+      text-align: center;
+      padding: 20px 0;
+    }
+    .beta-success-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(50, 205, 50, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+    .beta-success-icon svg {
+      width: 28px;
+      height: 28px;
+      stroke: var(--green);
+      fill: none;
+      stroke-width: 2.5;
+    }
+    .beta-success h3 {
+      margin-bottom: 8px;
+    }
+    .beta-success p {
+      color: var(--gray-400);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+      .beta-modal {
+        padding: 28px 24px;
+        border-radius: 20px;
+      }
+    }
+
+    /* ==============================
        SECTION SHARED
        ============================== */
     .section {
@@ -848,9 +994,7 @@
           <h1>Trouve ton <em>partenaire</em> d'entraînement idéal</h1>
           <p>MyGymBro te connecte avec des sportifs qui partagent ta salle, ton niveau et tes objectifs. Fini les séances solo.</p>
           <div class="hero-cta">
-            <a href="mailto:craftlabx@gmail.com?subject=Demande%20acc%C3%A8s%20b%C3%AAta%20MyGymBro" class="cta-glass">
-              Rejoins la bêta
-            </a>
+            <button class="cta-glass" data-open-beta>Rejoins la bêta</button>
             <p class="beta-note">Actuellement en bêta fermée — places limitées</p>
           </div>
         </div>
@@ -1053,9 +1197,7 @@
         <div class="cta-text gs-reveal">
           <h2>Prêt à trouver ton <em>training partner</em> ?</h2>
           <p>Rejoins la bêta et fais partie des premiers à tester MyGymBro. Places limitées.</p>
-          <a href="mailto:craftlabx@gmail.com?subject=Demande%20acc%C3%A8s%20b%C3%AAta%20MyGymBro" class="cta-glass">
-            Rejoins la bêta
-          </a>
+          <button class="cta-glass" data-open-beta>Rejoins la bêta</button>
           <p class="beta-note">Actuellement en bêta fermée — places limitées</p>
         </div>
         <div class="cta-mockup gs-reveal">
@@ -1090,6 +1232,29 @@
     </div>
   </footer>
 
+  <!-- BETA MODAL -->
+  <div class="beta-overlay" id="beta-overlay">
+    <div class="beta-modal">
+      <button class="beta-modal-close" aria-label="Fermer">&times;</button>
+      <div id="beta-form-container">
+        <h3>Rejoins la bêta</h3>
+        <p class="beta-subtitle">Laisse-nous tes coordonnées, on te recontacte très vite.</p>
+        <form class="beta-form" id="beta-form" action="https://formspree.io/f/xeervavj" method="POST">
+          <input type="text" name="prenom" placeholder="Ton prénom" required autocomplete="given-name">
+          <input type="email" name="email" placeholder="Ton email" required autocomplete="email">
+          <button type="submit" class="cta-glass">Envoyer</button>
+        </form>
+      </div>
+      <div id="beta-success" class="beta-success" style="display:none;">
+        <div class="beta-success-icon">
+          <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        <h3>Demande envoyée !</h3>
+        <p>On revient vers toi très vite.</p>
+      </div>
+    </div>
+  </div>
+
   <!-- GSAP + ScrollTrigger -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -1110,6 +1275,65 @@
           links.classList.remove('open');
           toggle.classList.remove('active');
           toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    })();
+
+    // --- Beta modal ---
+    (function() {
+      var overlay = document.getElementById('beta-overlay');
+      var formContainer = document.getElementById('beta-form-container');
+      var success = document.getElementById('beta-success');
+      var form = document.getElementById('beta-form');
+      var closeBtn = overlay.querySelector('.beta-modal-close');
+
+      function open() { overlay.classList.add('active'); }
+      function close() {
+        overlay.classList.remove('active');
+        // Reset after animation
+        setTimeout(function() {
+          formContainer.style.display = '';
+          success.style.display = 'none';
+        }, 300);
+      }
+
+      // Open buttons
+      document.querySelectorAll('[data-open-beta]').forEach(function(btn) {
+        btn.addEventListener('click', open);
+      });
+
+      // Close
+      closeBtn.addEventListener('click', close);
+      overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) close();
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') close();
+      });
+
+      // Submit
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var btn = form.querySelector('button[type="submit"]');
+        btn.textContent = 'Envoi...';
+        btn.disabled = true;
+
+        fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        }).then(function(res) {
+          if (res.ok) {
+            formContainer.style.display = 'none';
+            success.style.display = '';
+            form.reset();
+          } else {
+            btn.textContent = 'Erreur, réessaie';
+            btn.disabled = false;
+          }
+        }).catch(function() {
+          btn.textContent = 'Erreur, réessaie';
+          btn.disabled = false;
         });
       });
     })();

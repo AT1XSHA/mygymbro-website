@@ -104,6 +104,9 @@ nav.nav--scrolled {
   gap: 28px;
   align-items: center;
 }
+.nav-link--home {
+  display: none;
+}
 .nav-links a {
   color: rgba(255, 255, 255, 0.85);
   text-decoration: none;
@@ -172,6 +175,9 @@ nav.nav--scrolled {
   }
   .nav-links.open {
     transform: translateX(0);
+  }
+  .nav-link--home {
+    display: block;
   }
   .nav-links a {
     font-size: 18px;
